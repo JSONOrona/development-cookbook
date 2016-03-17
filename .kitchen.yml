@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 1024
+    cpus: 2
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-7.1
+    #driver:
+    #  gui: true
+
+suites:
+  - name: nodesktop
+    driver:
+      vm_hostname: devbox
+    run_list:
+      - recipe[development-cookbook::default]
+    attributes:
+  - name: desktop
+    driver:
+      vm_hostname: devbox
+    run_list:
+      - recipe[development-cookbook::default]
+      - recipe[development-cookbook::desktop]
+    attributes:

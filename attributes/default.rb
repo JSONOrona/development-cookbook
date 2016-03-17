@@ -1,0 +1,9 @@
+# Intellij settings
+default['idea']['version'] = '15.0.2'
+default['idea']['edition'] = 'C'
+default['idea']['setup_dir'] = '/opt'
+default['idea']['64bits']['Xmx'] = '2048m'
+default['idea']['64bits']['Xms'] = '2048m'
+# OpenJDK settings
+default['java']['install_flavor'] = 'openjdk'
+default['java']['jdk_version'] = 8
