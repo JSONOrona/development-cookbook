@@ -2,7 +2,7 @@
 driver:
   name: vagrant
   customize:
-    memory: 1024
+    memory: 2048
     cpus: 2
 
 provisioner:
@@ -10,8 +10,8 @@ provisioner:
 
 platforms:
   - name: centos-7.1
-    #driver:
-    #  gui: true
+    driver:
+      gui: true
 
 suites:
   - name: nodesktop
@@ -19,6 +19,7 @@ suites:
       vm_hostname: devbox
     run_list:
       - recipe[development-cookbook::default]
+      - recipe[development-cookbook::desktop]
     attributes:
   - name: desktop
     driver:
