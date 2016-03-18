@@ -20,6 +20,12 @@ yumgroup 'Graphical Administration Tools' do
   notifies :reboot_now, 'reboot[now]', :immediately
 end
 
+# remove "rpm -e initial-setup initial-setup-gui". Thankfully these are not dependencies for anything.
+# 4) Reboot: sync; echo 1 > /proc/sys/kernel/sysrq; echo b > /proc/sysrq-trigger
+# Install tiger vnc
+# http://www.krizna.com/centos/install-vnc-server-centos-7/
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7
+
 reboot 'now' do
   action :nothing
   reason 'Cannot continue Chef run without a reboot.'
