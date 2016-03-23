@@ -17,3 +17,6 @@ default['idea']['edition'] = 'C'
 default['idea']['setup_dir'] = '/opt'
 default['idea']['64bits']['Xmx'] = '2048m'
 default['idea']['64bits']['Xms'] = '2048m'
+
+# VNC username
+default['vnc']['account_username'] = 'test-user'

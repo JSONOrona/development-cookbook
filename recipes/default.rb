@@ -13,6 +13,7 @@ include_recipe 'git::default'
 include_recipe 'development-cookbook::idea'
 include_recipe "yum-mysql-community::#{mysql_version}"
 
+=begin
 directory '/opt/workspace' do
   owner 'vagrant'
   group 'vagrant'
@@ -26,3 +27,4 @@ remote_file '/opt/workspace' do
   owner 'vagrant'
   action :create
 end
+=end
