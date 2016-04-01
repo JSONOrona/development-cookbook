@@ -4,14 +4,20 @@ yumgroup 'GNOME Desktop' do
   action :install
 end
 
+execute 'rpm remove initial-setup' do
+  command 'yum -y remove *initial-setup*'
+  ignore_failure true
+  user 'root'
+end
+
 execute 'graphical target' do
   command 'systemctl set-default graphical.target && systemctl default'
 end
 
-yumgroup 'Graphical Administration Tools' do
-  action :install
+# yumgroup 'Graphical Administration Tools' do
+#  action :install
   #notifies :reboot_now, 'reboot[now]', :immediately
-end
+# end
 
 include_recipe 'development-cookbook::vnc'
 # remove "rpm -e initial-setup initial-setup-gui". Thankfully these are not dependencies for anything.
@@ -20,10 +26,8 @@ include_recipe 'development-cookbook::vnc'
 # http://www.krizna.com/centos/install-vnc-server-centos-7/
 # https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7
 
-=begin
 reboot 'now' do
-  action :nothing
-  reason 'Cannot continue Chef run without a reboot.'
+  action :request_reboot
+  # reason 'Cannot continue Chef run without a reboot.'
   delay_mins 1
 end
-=end

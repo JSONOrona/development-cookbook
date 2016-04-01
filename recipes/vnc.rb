@@ -32,7 +32,7 @@ package 'tigervnc-server' do
   action :install
 end
 
-template "/lib/systemd/system/#{instance_name}.service" do
+template "/etc/systemd/system/#{instance_name}.service" do
   source 'vncserver.service.erb'
   variables(
     :instance_name => instance_name,
@@ -46,10 +46,6 @@ end
 
 execute 'reload daemon' do
   command 'systemctl daemon-reload'
-end
-
-execute 'enable vncservice' do
-  command 'systemctl enable vncserver@:1.service && systemctl start vncserver@:1.service'
 end
 
 # execute 'firewall policy' do
@@ -67,6 +63,19 @@ end
 execute "Ensure ownership of the passwd file" do
   user "root"
   command "chown #{account_username}:#{account_username} #{password_file} && chmod 0600 #{password_file}"
+end
+
+execute 'enable vncservice' do
+  command 'systemctl enable vncserver@:1.service'
+  ignore_failure true
+end
+
+execute 'reload daemon' do
+  command 'systemctl daemon-reload'
+end
+
+execute 'start vncservice' do
+  command 'systemctl start vncserver@:1.service'
 end
 
 execute 'restart vncservice' do
